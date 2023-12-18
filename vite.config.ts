@@ -42,7 +42,7 @@ export default defineConfig({
     globals: true,
     coverage: {
       provider: 'v8',
-      enabled: isCI,
+      enabled: true,
       include: ['src/**/*.{ts,tsx}', '!src/types.ts'],
       reporter: ['text', 'json', 'html']
     },
