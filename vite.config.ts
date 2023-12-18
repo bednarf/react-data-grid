@@ -44,7 +44,7 @@ export default defineConfig({
       provider: 'v8',
       enabled: isCI,
       include: ['src/**/*.{ts,tsx}', '!src/types.ts'],
-      reporter: ['text', 'json']
+      reporter: ['text', 'json', 'html']
     },
     poolOptions: {
       vmThreads: {
