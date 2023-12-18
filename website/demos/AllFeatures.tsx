@@ -68,7 +68,8 @@ const columns: readonly Column<Row>[] = [
     width: 200,
     resizable: true,
     frozen: true,
-    renderEditCell: textEditor
+    renderEditCell: textEditor,
+    renderEditHeaderCell: textEditor
   },
   {
     key: 'lastName',
@@ -83,7 +84,8 @@ const columns: readonly Column<Row>[] = [
     name: 'Email',
     width: 'max-content',
     resizable: true,
-    renderEditCell: textEditor
+    renderEditCell: textEditor,
+    renderEditHeaderCell: textEditor
   },
   {
     key: 'street',

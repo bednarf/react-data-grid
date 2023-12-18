@@ -34,6 +34,7 @@ export interface Column<TRow, TSummaryRow = unknown> {
   readonly renderGroupCell?: Maybe<(props: RenderGroupCellProps<TRow, TSummaryRow>) => ReactNode>;
   /** Render function used to render the content of edit cells. When set, the column is automatically set to be editable */
   readonly renderEditCell?: Maybe<(props: RenderEditCellProps<TRow, TSummaryRow>) => ReactNode>;
+  readonly renderEditHeaderCell?: Maybe<any>;
   /** Enables cell editing. If set and no editor property specified, then a textinput will be used as the cell editor */
   readonly editable?: Maybe<boolean | ((row: TRow) => boolean)>;
   readonly colSpan?: Maybe<(args: ColSpanArgs<TRow, TSummaryRow>) => Maybe<number>>;
@@ -73,6 +74,8 @@ export interface CalculatedColumn<TRow, TSummaryRow = unknown> extends Column<TR
   readonly frozen: boolean;
   readonly isLastFrozenColumn: boolean;
   readonly renderCell: (props: RenderCellProps<TRow, TSummaryRow>) => ReactNode;
+  // readonly renderEditHeaderCell: (props: RenderHeaderEditCellProps<TRow, TSummaryRow>) => ReactNode;
+  readonly renderEditHeaderCell: any;
 }
 
 export interface ColumnGroup<R, SR = unknown> {
@@ -131,6 +134,12 @@ export interface RenderEditCellProps<TRow, TSummaryRow = unknown> {
   column: CalculatedColumn<TRow, TSummaryRow>;
   row: TRow;
   onRowChange: (row: TRow, commitChanges?: boolean) => void;
+  onClose: (commitChanges?: boolean, shouldFocusCell?: boolean) => void;
+}
+
+export interface RenderHeaderEditCellProps<TRow, TSummaryRow = unknown> {
+  column: CalculatedColumn<TRow, TSummaryRow>;
+  onChange: (newValue: string, commitChanges?: boolean) => void;
   onClose: (commitChanges?: boolean, shouldFocusCell?: boolean) => void;
 }
 

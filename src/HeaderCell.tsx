@@ -108,7 +108,13 @@ export default function HeaderCell<R, SR>({
     [cellOverClassname]: isOver
   });
 
-  const renderHeaderCell = column.renderHeaderCell ?? defaultRenderHeaderCell;
+  // const renderHeaderCell = column.renderHeaderCell ?? defaultRenderHeaderCell;
+  const renderHeaderCell = (args: any): any => {
+    // console.log(args.column.name)
+    // console.log(!!column.renderEditHeaderCell)
+    // return column.renderHeaderCell ?? defaultRenderHeaderCell(args)
+    return defaultRenderHeaderCell(args);
+  };
 
   function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
     if (event.pointerType === 'mouse' && event.buttons !== 1) {

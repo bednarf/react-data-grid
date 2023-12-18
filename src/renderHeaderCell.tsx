@@ -2,15 +2,16 @@ import { css } from '@linaria/core';
 
 import type { RenderHeaderCellProps } from './types';
 import { useDefaultRenderers } from './DataGridDefaultRenderersProvider';
+import { textEditorClassname } from './editors/textEditor';
 
 const headerSortCellClassname = css`
-  @layer rdg.SortableHeaderCell {
+  @layer rdg . SortableHeaderCell {
     display: flex;
   }
 `;
 
 const headerSortName = css`
-  @layer rdg.SortableHeaderCellName {
+  @layer rdg . SortableHeaderCellName {
     flex-grow: 1;
     overflow: clip;
     text-overflow: ellipsis;
@@ -24,11 +25,29 @@ export default function renderHeaderCell<R, SR>({
   sortDirection,
   priority
 }: RenderHeaderCellProps<R, SR>) {
-  if (!column.sortable) return column.name;
-
+  console.log({ column });
+  console.log(!!column.renderEditHeaderCell);
+  if (!column.sortable)
+    return !!column.renderEditHeaderCell ? (
+      <input
+        className={textEditorClassname}
+        defaultValue={column.name as string}
+        onBlur={(event) => console.log(event.target.value)}
+      />
+    ) : (
+      column.name
+    );
   return (
     <SortableHeaderCell sortDirection={sortDirection} priority={priority}>
-      {column.name}
+      {!!column.renderEditHeaderCell ? (
+        <input
+          className={textEditorClassname}
+          value={column.name as string}
+          onChange={(event) => console.log('here')}
+        />
+      ) : (
+        column.name
+      )}
     </SortableHeaderCell>
   );
 }
